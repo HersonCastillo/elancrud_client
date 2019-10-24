@@ -7,12 +7,13 @@
 
             <v-spacer></v-spacer>
 
-            <router-link to="/login">
+            <router-link to="/login" v-if="!isLogged">
                 <v-btn small color="warn" class="btn-custom">Sign In</v-btn>
             </router-link>
-            <router-link to="/register">
+            <router-link to="/register" v-if="!isLogged">
                 <v-btn small color="error" class="btn-custom">Sign Up</v-btn>
             </router-link>
+            <v-btn small v-if="isLogged" @click="logout" color="error" class="btn-custom">Log Out</v-btn>
         </v-app-bar>
         <v-app>
             <v-content>
@@ -27,3 +28,17 @@
         margin-left: 10px;
     }
 </style>
+
+<script lang="ts">
+    import { Vue, Component } from 'vue-property-decorator';
+    @Component
+    export default class App extends Vue {
+        get isLogged(): boolean {
+            let state: string = this.$store.getters.token;
+            return state != null && state.length > 0;
+        }
+        logout(): void {
+            this.$store.dispatch('logout');
+        }
+    }
+</script>
