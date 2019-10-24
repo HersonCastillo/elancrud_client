@@ -11,9 +11,12 @@
                 <v-btn small color="warn" class="btn-custom">Sign In</v-btn>
             </router-link>
             <router-link to="/register" v-if="!isLogged">
-                <v-btn small color="error" class="btn-custom">Sign Up</v-btn>
+                <v-btn small class="btn-custom">Sign Up</v-btn>
             </router-link>
-            <v-btn small v-if="isLogged" @click="logout" color="error" class="btn-custom">Log Out</v-btn>
+            <router-link v-if="isLogged" to="/user/home">
+                <v-btn small class="btn-custom">Profile</v-btn>
+            </router-link>
+            <v-btn small v-if="isLogged" @click="logout" class="btn-custom">Log Out</v-btn>
         </v-app-bar>
         <v-app>
             <v-content>
