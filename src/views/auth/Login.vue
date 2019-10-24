@@ -57,7 +57,9 @@
             password: ''
         };
         login(): void {
-            this.$store.dispatch('auth', this.properties);
+            if(this.properties.isValid){
+                this.$store.dispatch('auth', this.properties);
+            }
         }
     }
 </script>
